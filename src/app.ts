@@ -23,7 +23,14 @@ animate();
 function animate() {
     car.update();
     cvs.canvas.height = window.innerHeight;
+
+    cvs.context.save();
+    cvs.context.translate(0, -car.y + cvs.canvas.height * 0.7);
+
     road.draw(cvs.context);
     car.draw(cvs.context);
+
+    cvs.context.restore();
+
     requestAnimationFrame(animate);
 }
