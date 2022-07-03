@@ -6,7 +6,7 @@ const Road: RoadConstructor = class Road implements RoadInterface {
     private right: number;
     private top: number;
     private bottom: number;
-    private borders: Array<borderType[]>;
+    private borders: Array<coordType[]>;
 
     static infinity: number = 1000000;
 
@@ -59,7 +59,7 @@ const Road: RoadConstructor = class Road implements RoadInterface {
             ctx.moveTo(border[0].x, border[0].y);
             ctx.lineTo(border[1].x, border[1].y);
             ctx.stroke();
-            
+
         });
     }
 }

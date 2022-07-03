@@ -39,7 +39,20 @@ interface RoadInterface {
     getLaneCenter(laneIdx: number): number;
 }
 
-type borderType = {
+type coordType = {
     x: number,
     y: number
+}
+
+interface SensorConstructor {
+    new (car: CarInterface);
+}
+
+interface SensorInterface {
+    car: CarInterface
+    rayCount: number;
+    rayLength: number;
+    raySpread: number;
+
+    update()
 }
