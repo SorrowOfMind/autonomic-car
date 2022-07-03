@@ -31,10 +31,15 @@ interface RoadConstructor {
     new (x: number, width: number, lanes?: number);
 }
 
-interface RaodInterface {
+interface RoadInterface {
     // x: number;
     // width: number;
     // lanesNum: number;
     draw(ctx: CanvasRenderingContext2D): void
     getLaneCenter(laneIdx: number): number;
+}
+
+type borderType = {
+    x: number,
+    y: number
 }

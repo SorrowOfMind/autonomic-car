@@ -10,7 +10,7 @@ var Canvas = /** @class */ (function () {
     return Canvas;
 }());
 var cvs = new Canvas();
-var road = new Raod(cvs.width / 2, cvs.width * 0.9);
+var road = new Road(cvs.width / 2, cvs.width * 0.9);
 var car = new Car(road.getLaneCenter(1), 100, 30, 50);
 animate();
 function animate() {

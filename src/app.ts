@@ -15,7 +15,7 @@ class Canvas implements CanvasInterface {
 }
 
 let cvs = new Canvas();
-let road = new Raod(cvs.width/2, cvs.width * 0.9);
+let road = new Road(cvs.width/2, cvs.width * 0.9);
 let car = new Car(road.getLaneCenter(1), 100, 30, 50);
 
 animate();

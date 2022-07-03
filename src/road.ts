@@ -1,4 +1,4 @@
-const Raod: RoadConstructor = class Road implements RaodInterface {
+const Road: RoadConstructor = class Road implements RoadInterface {
     private x: number;
     private width: number;
     private lanesNum: number;
@@ -6,6 +6,7 @@ const Raod: RoadConstructor = class Road implements RaodInterface {
     private right: number;
     private top: number;
     private bottom: number;
+    private borders: Array<borderType[]>;
 
     static infinity: number = 1000000;
 
@@ -19,6 +20,16 @@ const Raod: RoadConstructor = class Road implements RaodInterface {
 
         this.top = -Road.infinity;
         this.bottom = Road.infinity;
+
+        const topLeft = {x: this.left, y: this.top};
+        const topRight = {x: this.right, y: this.top};
+        const bottomLeft = {x: this.left, y: this.bottom};
+        const bottomRight = {x: this.right, y: this.bottom};
+
+        this.borders = [
+            [topLeft, bottomLeft],
+            [topRight, bottomRight]
+        ];
     }
 
     getLaneCenter(laneIdx: number) {
@@ -30,19 +41,25 @@ const Raod: RoadConstructor = class Road implements RaodInterface {
         ctx.lineWidth = 5;
         ctx.strokeStyle = "#fff";
 
-        for (let  i = 0; i <= this.lanesNum; i++) {
+        for (let i = 1; i <= this.lanesNum - 1; i++) {
             //linear interpolation
             const x = lerp(this.left, this.right, i / this.lanesNum); //we need to get values from left to right
-            if (i > 0 && i < this.lanesNum) {
-                ctx.setLineDash([20, 20]); //20px len and 20 px break
-            } else {
-                ctx.setLineDash([]);
-            }
+
+            ctx.setLineDash([20, 20]); //20px len and 20 px break
+           
             ctx.beginPath();
             ctx.moveTo(x, this.top);
             ctx.lineTo(x, this.bottom);
             ctx.stroke();
         }
 
+        ctx.setLineDash([]);
+        this.borders.forEach(border => {
+            ctx.beginPath();
+            ctx.moveTo(border[0].x, border[0].y);
+            ctx.lineTo(border[1].x, border[1].y);
+            ctx.stroke();
+            
+        });
     }
 }
