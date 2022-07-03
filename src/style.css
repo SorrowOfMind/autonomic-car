@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 10px;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+#cvs {
+    background-color: darkgray;
+}
