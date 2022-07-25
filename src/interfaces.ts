@@ -11,8 +11,9 @@ interface CarInterface {
     width: number;
     height: number;
     controls: ControlsInterface;
+    angle: number;
     draw(ctx: CanvasRenderingContext2D): void;
-    update(): void;
+    update(roadBorders: Array<CoordType[]>): void;
     move(): void
 }
 
@@ -39,9 +40,17 @@ interface RoadInterface {
     getLaneCenter(laneIdx: number): number;
 }
 
-type coordType = {
+type CoordType = {
     x: number,
     y: number
+}
+
+type Segment = [CoordType, CoordType];
+
+type Intersection = {
+    x: number,
+    y: number,
+    offset: number
 }
 
 interface SensorConstructor {
@@ -54,5 +63,6 @@ interface SensorInterface {
     rayLength: number;
     raySpread: number;
 
-    update()
+    update: (roadBorders: Array<CoordType[]>) => void;
+    draw: (ctx: CanvasRenderingContext2D) => void;
 }

@@ -4,11 +4,12 @@ const Car: CarConstructor = class Car implements CarInterface {
     public width: number;
     public height: number;
     public controls: ControlsInterface;
+    public sensors: SensorInterface;
     private speed: number;
     private acceleration: number;
     private maxSpeed: number;
     private friction: number;
-    private angle: number;
+    public angle: number;
 
     constructor(x: number, y: number, width: number, height: number) {
         this.x = x;
@@ -22,6 +23,7 @@ const Car: CarConstructor = class Car implements CarInterface {
         this.friction = 0.05;
         this.angle = 0;
 
+        this.sensors = new Sensor(this);
         this.controls = new Controls();
     }
 
@@ -38,6 +40,8 @@ const Car: CarConstructor = class Car implements CarInterface {
             );
         ctx.fill();
         ctx.restore();
+
+        this.sensors.draw(ctx);
     }
 
     move() {
@@ -80,7 +84,8 @@ const Car: CarConstructor = class Car implements CarInterface {
         this.y -= Math.cos(this.angle) * this.speed; 
     }
 
-    update() {
+    update(roadBorders: Array<CoordType[]>) {
        this.move();
+       this.sensors.update(roadBorders);
     }
 }

@@ -1,5 +1,5 @@
-var Canvas = /** @class */ (function () {
-    function Canvas() {
+class Canvas {
+    constructor() {
         this.canvas = document.getElementById('cvs');
         this.context = this.canvas.getContext("2d");
         this.width = 200;
@@ -7,14 +7,13 @@ var Canvas = /** @class */ (function () {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
     }
-    return Canvas;
-}());
-var cvs = new Canvas();
-var road = new Road(cvs.width / 2, cvs.width * 0.9);
-var car = new Car(road.getLaneCenter(1), 100, 30, 50);
+}
+let cvs = new Canvas();
+let road = new Road(cvs.width / 2, cvs.width * 0.9);
+let car = new Car(road.getLaneCenter(1), 100, 30, 50);
 animate();
 function animate() {
-    car.update();
+    car.update(road.borders);
     cvs.canvas.height = window.innerHeight;
     cvs.context.save();
     cvs.context.translate(0, -car.y + cvs.canvas.height * 0.7);

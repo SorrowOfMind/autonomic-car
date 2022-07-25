@@ -6,7 +6,7 @@ const Road: RoadConstructor = class Road implements RoadInterface {
     private right: number;
     private top: number;
     private bottom: number;
-    private borders: Array<coordType[]>;
+    private borders: Array<CoordType[]>;
 
     static infinity: number = 1000000;
 

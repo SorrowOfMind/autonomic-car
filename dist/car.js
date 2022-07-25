@@ -1,5 +1,5 @@
-var Car = /** @class */ (function () {
-    function Car(x, y, width, height) {
+const Car = class Car {
+    constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -9,9 +9,10 @@ var Car = /** @class */ (function () {
         this.maxSpeed = 3;
         this.friction = 0.05;
         this.angle = 0;
+        this.sensors = new Sensor(this);
         this.controls = new Controls();
     }
-    Car.prototype.draw = function (ctx) {
+    draw(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(-this.angle);
@@ -19,8 +20,9 @@ var Car = /** @class */ (function () {
         ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height);
         ctx.fill();
         ctx.restore();
-    };
-    Car.prototype.move = function () {
+        this.sensors.draw(ctx);
+    }
+    move() {
         if (this.controls.forward) {
             this.speed += this.acceleration;
         }
@@ -43,7 +45,7 @@ var Car = /** @class */ (function () {
             this.speed = 0;
         }
         if (this.speed != 0) {
-            var flip = this.speed > 0 ? 1 : -1;
+            const flip = this.speed > 0 ? 1 : -1;
             if (this.controls.right) {
                 this.angle -= 0.03 * flip;
             }
@@ -53,10 +55,10 @@ var Car = /** @class */ (function () {
         }
         this.x -= Math.sin(this.angle) * this.speed;
         this.y -= Math.cos(this.angle) * this.speed;
-    };
-    Car.prototype.update = function () {
+    }
+    update(roadBorders) {
         this.move();
-    };
-    return Car;
-}());
+        this.sensors.update(roadBorders);
+    }
+};
 //# sourceMappingURL=car.js.map
